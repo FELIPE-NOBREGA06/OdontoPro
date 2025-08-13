@@ -10,7 +10,7 @@ if(process.env.NODE_ENV === 'production'){
     }
 
     if(!gloolWithPrisma.prisma){
-        gloolWithPrisma.print = new PrismaClient();
+        gloolWithPrisma.prisma = new PrismaClient();
     }
 
     prisma = gloolWithPrisma.prisma;
