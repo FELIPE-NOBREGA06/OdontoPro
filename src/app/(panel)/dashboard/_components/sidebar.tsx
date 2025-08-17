@@ -31,7 +31,7 @@ export function SidebarDashboard({ children }: { children: React.ReactNode }) {
       {/* Sidebar Desktop */}
       <aside
         className={clsx(
-          "flex flex-col border-r bg-background transition-all duration-300 p-4 h-full hidden md:flex md:fixed",
+          " flex-col border-r bg-background transition-all duration-300 p-4 h-full hidden md:flex md:fixed",
           {
             "w-20": isCollapsed,
             "w-64": !isCollapsed
@@ -86,7 +86,9 @@ export function SidebarDashboard({ children }: { children: React.ReactNode }) {
           <Sheet>
             <div className='flex items-center gap-4'>
               <SheetTrigger asChild>
-                <Button variant="outline" size="icon" className='md:hidden'>
+                <Button variant="outline" size="icon" className='md:hidden'
+                onClick={() => setIsCollapsed(false)}
+                >
                   <List className='w-5 h-5' />
                 </Button>
               </SheetTrigger>
