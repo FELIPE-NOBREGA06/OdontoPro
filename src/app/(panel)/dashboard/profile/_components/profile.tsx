@@ -34,15 +34,35 @@ import {
 import { ArrowRight} from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
+import { Prisma } from '@/generated/prisma'
+import { updateProfile } from '../_actions/update_profile'
+import { toast } from 'sonner'
+import { formatPhone } from '@/utils/formatPhone'
 
 
 
-export function ProfileContent(){
+type UserWithSubscription = Prisma.UserGetPayload<{
+  include: {
+    subscription: true
+  }
+}>
 
-    const [selecteHours, setSelecteHours] = useState<string[]>([])
+interface ProfileContentProps {
+  user: UserWithSubscription;
+}
+
+export function ProfileContent( { user} : ProfileContentProps){
+
+    const [selecteHours, setSelecteHours] = useState<string[]>(user.times ?? [])
     const [dialogIsopen, setDialogIsOpen] = useState(false);
 
-    const form = useProfileForm();
+    const form = useProfileForm({
+        name: user.name,
+        adress: user.address,
+        phone: user.phone,
+        status: user.status,
+        timeZone: user.timeZone
+    });
 
     function generateTimeSlots(): string[]{
         const hours: string[] = [];
@@ -73,14 +93,23 @@ export function ProfileContent(){
         zone.startsWith("America/Manaus") 
     );
 
-    async function onSubmit(value : profileFormData) {
-        const profileData = {
-            ...value,
-            times : selecteHours
-        }
+    async function onSubmit(values: profileFormData) {
 
-        console.log("values:",profileData )
-        
+        const response = await updateProfile({
+            name: values.name,
+            address: values.address,
+            phone: values.phone,
+            status: values.status === "active",
+            timeZone: values.timeZone,
+            times: selecteHours || [],
+        })
+
+        if(response.error){
+            toast.error(response.error)
+            return;
+        }
+            
+        toast.success(response.data)   
     }
 
     return(
@@ -95,7 +124,7 @@ export function ProfileContent(){
                         <div className='flex justify-center'>
                             <div className='bg-gray-200 relative h-40 w-40 rounded-full overflow-hidden'>
                                 <Image
-                                src={ImageTest}
+                                src={user.image ? user.image : ImageTest}
                                 alt='imagem da clinica'
                                 fill
                                 className='object-cover'
@@ -139,42 +168,46 @@ export function ProfileContent(){
                             />
 
                             <FormField
-                             control={form.control}
-                             name="phone"
-                             render={({field}) => (
-                                <FormItem>
-                                    <FormLabel className='font-semibold'>Telefone</FormLabel>
+                                control={form.control}
+                                name="phone"
+                                render={({ field }) => (
+                                    <FormItem>
+                                    <FormLabel className="font-semibold">Telefone</FormLabel>
                                     <FormControl>
-                                        <Input 
-                                        {...field} 
-                                        placeholder='Digite o telefone...'
+                                        <Input
+                                        {...field}
+                                        value={field.value || ""} // garante valor controlado
+                                        placeholder="(65) 99912-3456"
+                                        onChange={(e) => {
+                                            const formattedValue = formatPhone(e.target.value)
+                                            field.onChange(formattedValue) // atualiza form com número formatado
+                                        }}
                                         />
                                     </FormControl>
-                                    <FormMessage/>
-                                </FormItem>
-                             )}
+                                    </FormItem>
+                                )}
                             />
                             
                           <FormField
                              control={form.control}
                              name="status"
                              render={({field}) => (
-                                <FormItem>
-                                    <FormLabel className='font-semibold'>status da clinica</FormLabel>
-                                    <FormControl>
+                                    <FormItem>
+                                        <FormLabel className='font-semibold'>status da clinica</FormLabel>
+                                        <FormControl>
 
-                                        <Select onValueChange={field.onChange} defaultValue={field.value ? "active" : "inactive" }>
-                                            <SelectTrigger>
-                                                <SelectValue placeholder="Selecione o status da clinica"/>
-                                            </SelectTrigger>
-                                            <SelectContent>
-                                               <SelectItem value='active'>Ativo (clinica aberta)</SelectItem>
-                                               <SelectItem value='inacitve'>Inativo (clinica fechada)</SelectItem>
-                                            </SelectContent>
-                                        </Select>
+                                            <Select onValueChange={field.onChange} defaultValue={field.value ? "active" : "inactive" }>
+                                                <SelectTrigger>
+                                                    <SelectValue placeholder="Selecione o status da clinica"/>
+                                                </SelectTrigger>
+                                                <SelectContent>
+                                                <SelectItem value='active'>Ativo (clinica aberta)</SelectItem>
+                                                <SelectItem value='inacitve'>Inativo (clinica fechada)</SelectItem>
+                                                </SelectContent>
+                                            </Select>
 
-                                    </FormControl>
-                                </FormItem>
+                                        </FormControl>
+                                    </FormItem>
                              )}
                             />
 
