@@ -2,14 +2,6 @@
 
 ---
 
-## 🎯 Objetivos
-- ✅ Desenvolver um protótipo web com base em requisitos reais.
-- ✅ Implementar autenticação segura (incluindo login social com Google).
-- ✅ Aplicar validações robustas para confiabilidade.
-- ✅ Criar uma interface **moderna**, **responsiva** e **acessível**.
-
----
-
 ## 🛠️ Tecnologias Utilizadas
 
 ### **Frontend**
