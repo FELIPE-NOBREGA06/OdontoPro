@@ -1,22 +1,20 @@
-import getSesion from '@/lib/getSession'
-import { redirect } from 'next/navigation'
-import { getUserData } from './_data-acess/get-info-user'
-import { ProfileContent } from './_components/profile'
+import getSesion from "@/lib/getSession";
+import { redirect } from "next/navigation";
+import { getUserData } from "./_data-acess/get-info-user";
+import { ProfileContent } from "./_components/profile";
 
 export default async function Profile() {
-  const session = await getSesion()
+  const session = await getSesion();
 
   if (!session) {
-    redirect("/")
+    redirect("/");
   }
 
-  const user = await getUserData({ userId: session.user?.id })
+  const user = await getUserData({ userId: session.user?.id });
 
   if (!user) {
-    redirect("/")
+    redirect("/");
   }
 
-  return (
-    <ProfileContent user={user} />
-  )
+  return <ProfileContent user={user} />;
 }
