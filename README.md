@@ -1,24 +1,5 @@
 # 🦷 OdontoPro
 
-> **Projeto Extensionista Integrador II – Prototipagem**  
-> Curso de Engenharia de Software | PEI II – Prototipagem
-
----
-
-## 📖 Sobre o Projeto
-O **OdontoPro** é um protótipo funcional desenvolvido como parte da disciplina **Projeto Extensionista Integrador II – Prototipagem**.  
-O objetivo é aplicar conceitos de **análise**, **design** e **usabilidade** para criar uma solução navegável que valide a proposta antes da implementação final.
-
-O sistema visa oferecer **uma experiência moderna, intuitiva e segura** para gestão e navegação de informações na área odontológica, utilizando tecnologias de ponta.
-
----
-
-## 🎯 Objetivos
-- ✅ Desenvolver um protótipo web com base em requisitos reais.
-- ✅ Implementar autenticação segura (incluindo login social com Google).
-- ✅ Aplicar validações robustas para confiabilidade.
-- ✅ Criar uma interface **moderna**, **responsiva** e **acessível**.
-
 ---
 
 ## 🛠️ Tecnologias Utilizadas
