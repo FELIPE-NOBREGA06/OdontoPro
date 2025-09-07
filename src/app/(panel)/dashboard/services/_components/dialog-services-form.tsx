@@ -2,32 +2,34 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 
-const formShema = z.object({
-  name: z.string().min(1, { message: "O nome do serviço é obrigatorio" }),
-  price: z.string().min(1, { message: "O preço do  serviço é obrigatorio" }),
+const formSchema = z.object({
+  name: z.string().min(1, { message: "O nome do serviço é obrigatório" }),
+  price: z.string().min(1, { message: "O preço do serviço é obrigatório" }),
   hours: z.string(),
-  minuts: z.string(),
+  minutes: z.string(),
 });
 
-export interface userDialogServiceFormProps {
-  initiaValues?: {
+export interface UserDialogServiceFormProps {
+  initialValues?: {
     name: string;
     price: string;
     hours: string;
-    minuts: string;
+    minutes: string;
   };
 }
 
-export type DialogServiceFormData = z.infer<typeof formShema>;
+export type DialogServiceFormData = z.infer<typeof formSchema>;
 
-export function useDialogServiceForm() {
+export function useDialogServiceForm({
+  initialValues,
+}: UserDialogServiceFormProps) {
   return useForm<DialogServiceFormData>({
-    resolver: zodResolver(formShema),
-    defaultValues: {
+    resolver: zodResolver(formSchema),
+    defaultValues: initialValues || {
       name: "",
       price: "",
       hours: "",
-      minuts: "",
+      minutes: "",
     },
   });
 }

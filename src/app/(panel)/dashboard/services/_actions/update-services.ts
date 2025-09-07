@@ -4,8 +4,10 @@ import { auth } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
+import { Session } from "inspector/promises";
 
 const formShema = z.object({
+  serviceId: z.string().min(1, "o id do serviço é obrigratório "),
   name: z.string().min(1, { message: "O nome do serviço é obrigratório" }),
   price: z.number().min(1, { message: "O preço do serviço é obrigratório" }),
   duration: z.number(),
@@ -13,12 +15,12 @@ const formShema = z.object({
 
 type forShema = z.infer<typeof formShema>;
 
-export async function createNewService(formData: forShema) {
+export async function updateService(formData: forShema) {
   const session = await auth();
 
   if (!session?.user?.id) {
     return {
-      error: "Falha ao castrar serviço",
+      error: "Falha ao atualizar serviço",
     };
   }
 
@@ -31,24 +33,26 @@ export async function createNewService(formData: forShema) {
   }
 
   try {
-    const newService = await prisma.service.create({
+    await prisma.service.update({
+      where: {
+        id: formData.serviceId,
+        userId: session?.user?.id,
+      },
       data: {
         name: formData.name,
         price: formData.price,
-        duration: formData.duration,
-        userId: session?.user?.id,
+        duration: formData.duration < 30 ? 30 : formData.duration,
       },
     });
 
-    revalidatePath("/dashborad/services");
+    revalidatePath("/dashboard/services");
 
     return {
-      data: newService,
+      data: "Serviço atualizado com sucesso",
     };
   } catch (err) {
-    console.log(err);
     return {
-      error: "Falha ao castrar serviço",
+      error: "falha ao atulizar serviço",
     };
   }
 }
