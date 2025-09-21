@@ -4,7 +4,6 @@ import { auth } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
-import { error } from "console";
 
 const formShema = z.object({
   serviceId: z.string().min(1, "o id do serviço é obrigatório"),

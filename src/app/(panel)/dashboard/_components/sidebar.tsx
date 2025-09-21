@@ -129,11 +129,11 @@ export function SidebarDashboard({ children }: { children: React.ReactNode }) {
               </SheetTrigger>
 
               <h1 className="text-base md:text-lg font-semibold">
-                Menu OdontoPro
+                Menu AgendMed
               </h1>
             </div>
             <SheetContent side="right" className="sm:max-w-xs text-black">
-              <SheetTitle>OdontoPRO</SheetTitle>
+              <SheetTitle>AgendMed</SheetTitle>
               <SheetDescription>Menu administrativo</SheetDescription>
 
               <nav className="grid gap-2 text-base pt-5">
