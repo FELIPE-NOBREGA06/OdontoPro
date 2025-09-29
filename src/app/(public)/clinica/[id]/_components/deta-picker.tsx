@@ -2,7 +2,6 @@
 import { useState } from "react";
 import { ptBR } from "date-fns/locale/pt-BR";
 import DatePicker, { registerLocale } from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 
 registerLocale("pt-BR", ptBR);
 
