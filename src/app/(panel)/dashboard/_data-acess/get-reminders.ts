@@ -1,7 +1,7 @@
 "use server";
 
 import prisma from "@/lib/prisma";
-import { Reminders } from "../_components/reminders";
+import { Reminders } from "../_components/reminder/reminders";
 
 export async function getReminders({ userId }: { userId: string }) {
   if (!userId) {
