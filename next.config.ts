@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
+<<<<<<< HEAD
     remotePatterns: [
       {
         protocol: "https",
@@ -9,6 +10,11 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+=======
+    domains: ['avatars.githubusercontent.com'],
+  },
+  
+>>>>>>> 6328a0a (att)
 };
 
 export default nextConfig;

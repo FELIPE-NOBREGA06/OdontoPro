@@ -10,6 +10,10 @@
     "cssVariables": true,
     "prefix": ""
   },
+<<<<<<< HEAD
+=======
+  "iconLibrary": "lucide",
+>>>>>>> 6328a0a (att)
   "aliases": {
     "components": "@/components",
     "utils": "@/lib/utils",
@@ -17,5 +21,10 @@
     "lib": "@/lib",
     "hooks": "@/hooks"
   },
+<<<<<<< HEAD
   "iconLibrary": "lucide"
 }
+=======
+  "registries": {}
+}
+>>>>>>> 6328a0a (att)

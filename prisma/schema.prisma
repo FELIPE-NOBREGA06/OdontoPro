@@ -1,5 +1,9 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6328a0a (att)
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
@@ -22,7 +26,11 @@ model Appointment {
   time String
   
   serviceId String
+<<<<<<< HEAD
   sevice Service @relation(fields: [serviceId], references: [id])
+=======
+  service Service @relation(fields: [serviceId], references: [id])
+>>>>>>> 6328a0a (att)
 
   userId String
   user User @relation(fields: [userId],references: [id])

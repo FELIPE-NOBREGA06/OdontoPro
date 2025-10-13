@@ -1,6 +1,10 @@
 import { Footer } from "./_components/footer";
 import { Header } from "./_components/header";
+<<<<<<< HEAD
 import { Hero } from "./_components/hero";
+=======
+import { Hero } from './_components/hero'
+>>>>>>> 6328a0a (att)
 import { Professionals } from "./_components/professionals";
 
 export default function Home() {
@@ -16,5 +20,10 @@ export default function Home() {
         <Footer />
       </div>
     </div>
+<<<<<<< HEAD
   );
 }
+=======
+  )
+}
+>>>>>>> 6328a0a (att)

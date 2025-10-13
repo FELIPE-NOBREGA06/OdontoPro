@@ -1,6 +1,10 @@
 "use client";
 import { useState } from "react";
+<<<<<<< HEAD
 import { profileFormData, useProfileForm } from "./profile.form";
+=======
+import { ProfileFormData, useProfileForm } from "./profile-form";
+>>>>>>> 6328a0a (att)
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Form,
@@ -34,7 +38,12 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Prisma } from "@/generated/prisma";
+<<<<<<< HEAD
 import { updateProfile } from "../_actions/update_profile";
+=======
+import { updateProfile } from "../_actions/update-profile"
+
+>>>>>>> 6328a0a (att)
 import { toast } from "sonner";
 import { formatPhone } from "@/utils/formatPhone";
 
@@ -54,7 +63,11 @@ export function ProfileContent({ user }: ProfileContentProps) {
 
   const form = useProfileForm({
     name: user.name,
+<<<<<<< HEAD
     adress: user.address,
+=======
+    address: user.address,
+>>>>>>> 6328a0a (att)
     phone: user.phone,
     status: user.status,
     timeZone: user.timeZone,
@@ -93,7 +106,11 @@ export function ProfileContent({ user }: ProfileContentProps) {
       zone.startsWith("America/Manaus")
   );
 
+<<<<<<< HEAD
   async function onSubmit(values: profileFormData) {
+=======
+  async function onSubmit(values: ProfileFormData) {
+>>>>>>> 6328a0a (att)
     const response = await updateProfile({
       name: values.name,
       address: values.address,
@@ -252,6 +269,7 @@ export function ProfileContent({ user }: ProfileContentProps) {
 
                         <div className="grid grid-cols-5 gap-2 ">
                           {hours.map((hour) => (
+<<<<<<< HEAD
                             <Button
                               key={hour}
                               variant="outline"
@@ -264,6 +282,19 @@ export function ProfileContent({ user }: ProfileContentProps) {
                             >
                               {hour}
                             </Button>
+=======
+                           <Button
+                            key={hour}
+                            variant="outline"
+                            className={cn(
+                              "h-10",
+                              selecteHours.includes(hour) && "border-2 !border-emerald-500"
+                            )}
+                            onClick={() => toggleHour(hour)}
+                          >
+                            {hour}
+                          </Button>
+>>>>>>> 6328a0a (att)
                           ))}
                         </div>
                       </section>
@@ -320,4 +351,8 @@ export function ProfileContent({ user }: ProfileContentProps) {
       </Form>
     </div>
   );
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 6328a0a (att)
